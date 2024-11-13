@@ -74,3 +74,65 @@ const currencies = new Map([
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
+let arr = ['a', 'b', 'c', 'd', 'e'];
+
+// slice
+console.log(arr.slice(2));
+console.log(arr.slice(2, 4));
+console.log(arr.slice(-2));
+console.log(arr.slice(-1));
+console.log(arr.slice(1, -2));
+console.log(arr.slice()); // shallow copy
+
+// splice - changes original array
+// console.log(arr.splice(2));
+// console.log(arr.splice(-1));
+// console.log(arr.splice(1, 2));
+console.log(arr);
+
+// reverse
+console.log(arr.reverse()); // changes original array
+console.log(arr);
+
+// concat
+const arr2 = ['e', 'f', 'g', 'h', 'i'];
+const letters = arr.concat(arr2);
+console.log(letters);
+console.log([...arr, ...arr2]);
+
+// join
+console.log(letters.join('-'));
+
+// at method
+console.log(arr[0]);
+console.log(arr.at(0));
+
+// getting last element of array
+console.log(arr[arr.length - 1]);
+console.log(arr.at(-1));
+console.log(arr.slice(-1));
+
+// looping - forEach
+// traditional method
+for (const [i, movement] of movements.entries()) {
+  if (movement > 0) console.log(`Movement ${i + 1}: You deposited ${movement}`);
+  else console.log(`Movement ${i + 1}: You withdrew ${Math.abs(movement)}`);
+}
+
+// for each method - break and continue dont work here
+movements.forEach(function (movement, i, array) {
+  if (movement > 0) console.log(`Movement ${i + 1}: You deposited ${movement}`);
+  else console.log(`Movement ${i + 1}: You withdrew ${Math.abs(movement)}`);
+});
+
+// map
+currencies.forEach(function (value, key, map) {
+  console.log(`${key}: ${value}`);
+});
+
+// set
+// there is no value in set
+const currenciesSet = new Set(['USD', 'SGD', 'INR', 'EUR', 'EUR', 'USD']);
+currenciesSet.forEach(function (value, _, map) {
+  console.log(`${key}: ${value}`);
+});
