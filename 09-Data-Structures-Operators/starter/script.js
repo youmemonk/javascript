@@ -576,3 +576,235 @@ console.log(...question);
 console.log([...question.entries()]);
 console.log([...question.keys()]);
 console.log([...question.values()]);
+
+// Coding Challenge #3
+
+/* 
+
+Let's continue with our football betting app! This time, we have a map with a log of the events that happened during the game. The values are the events themselves, and the keys are the minutes in which each event happened (a football game has 90 minutes plus some extra time).
+
+1. Create an array 'events' of the different game events that happened (no duplicates)
+
+2. After the game has finished, is was found that the yellow card from minute 64 was unfair. So remove this event from the game events log.
+
+3. Print the following string to the console: "An event happened, on average, every 9 minutes" (keep in mind that a game has 90 minutes)
+
+4. Loop over the events and log them to the console, marking whether it's in the first half or second half (after 45 min) of the game, like this:
+
+      [FIRST HALF] 17: ⚽️ GOAL
+
+GOOD LUCK 😀
+
+*/
+
+const gameEvents = new Map([
+  [17, '⚽️ GOAL'],
+
+  [36, '🔁 Substitution'],
+
+  [47, '⚽️ GOAL'],
+
+  [61, '🔁 Substitution'],
+
+  [64, '🔶 Yellow card'],
+
+  [69, '🔴 Red card'],
+
+  [70, '🔁 Substitution'],
+
+  [72, '🔁 Substitution'],
+
+  [76, '⚽️ GOAL'],
+
+  [80, '⚽️ GOAL'],
+
+  [92, '🔶 Yellow card'],
+]);
+
+const events = [...new Set(gameEvents.values())];
+
+console.log(events);
+
+gameEvents.delete(gameEvents.get(64));
+
+console.log(
+  `An event happened, on average every ${90 / gameEvents.size} minutes.`
+);
+
+for (const [key, value] of gameEvents) {
+  console.log(`[${key <= 45 ? 'FIRST' : 'SECOND'} HALF]: ${key}: ${value}`);
+}
+
+// WORKING WITH STRINGS
+
+const airplane = 'Indigo India Airlines';
+
+const plane = 'Airbus A360neo';
+
+console.log(plane.length);
+
+console.log('B737'[0]);
+
+console.log(airplane.indexOf('r'));
+
+console.log(airplane.lastIndexOf('r'));
+
+console.log(airplane.slice(4, 7));
+
+console.log(airplane.slice(0, airplane.indexOf(' ')));
+
+const checkMiddleSeat = function (seat) {
+  // B and E are middle seats
+
+  const s = seat.slice(-1);
+
+  if (s === 'B' || s === 'E') console.log('You got the middle seat!');
+  else console.log('You got lucky!');
+};
+
+checkMiddleSeat('11B');
+
+checkMiddleSeat('23E');
+
+checkMiddleSeat('3E');
+
+checkMiddleSeat('2A');
+
+console.log(new String('Mayank'));
+
+console.log(typeof new String('Mayank').slice(-1));
+
+console.log(airplane.toLowerCase());
+
+console.log(airplane.toUpperCase());
+
+const passenger = 'mAyANk';
+
+const passengerLower = passenger.toLowerCase();
+
+const passengerCorrect =
+  passengerLower[0].toUpperCase() + passengerLower.slice(1);
+
+console.log(passengerCorrect);
+
+const email = 'hello@mayank.io';
+
+const loginEmail = ' Hello@Mayank.io  \n';
+
+const normalizedEmail = loginEmail.toLowerCase().trim();
+
+console.log(email === normalizedEmail);
+
+// replacing
+
+const priceGB = '288,97$';
+
+const priceUS = priceGB.replace('$', 'USD');
+
+console.log(priceUS);
+
+const announcement =
+  'All passengers come to boarding door 23. Boarding door 23.';
+
+console.log(announcement.replace('door', 'gate'));
+
+console.log(announcement.replace(/door/g, 'gate'));
+
+console.log(plane.includes('A360'));
+
+console.log(plane.startsWith('Airbus'));
+
+console.log(plane.endsWith('neo'));
+
+console.log('a very nice string'.split(' '));
+
+const passenger2 = 'jessica ann smith davis';
+
+const capitalizeName = function (name) {
+  const names = name.split(' ');
+
+  const namesUpper = [];
+
+  for (const n of names) {
+    // namesUpper.push(n[0].toUpperCase() + n.split(1));
+
+    namesUpper.push(n.replace(n[0], n[0].toUpperCase()));
+  }
+
+  console.log(namesUpper.join(' '));
+};
+
+capitalizeName(passenger);
+
+capitalizeName(passenger2);
+
+//////////////////////////////////////
+
+// Coding Challenge #4
+
+/* 
+
+Write a program that receives a list of variable names written in underscore_case and convert them to camelCase.
+
+The input will come from a textarea inserted into the DOM (see code below), and conversion will happen when the button is pressed.
+
+THIS TEST DATA (pasted to textarea)
+
+underscore_case
+
+ first_name
+
+Some_Variable 
+
+  calculate_AGE
+
+delayed_departure
+
+SHOULD PRODUCE THIS OUTPUT (5 separate console.log outputs)
+
+underscoreCase      ✅
+
+firstName           ✅✅
+
+someVariable        ✅✅✅
+
+calculateAge        ✅✅✅✅
+
+delayedDeparture    ✅✅✅✅✅
+
+HINT 1: Remember which character defines a new line in the textarea 😉
+
+HINT 2: The solution only needs to work for a variable made out of 2 words, like a_b
+
+HINT 3: Start without worrying about the ✅. Tackle that only after you have the variable name conversion working 😉
+
+HINT 4: This challenge is difficult on purpose, so start watching the solution in case you're stuck. Then pause and continue!
+
+Afterwards, test with your own test data!
+
+GOOD LUCK 😀
+
+*/
+
+const convertSnakeCaseToCamelCase = function (word) {
+  const words = word.toLowerCase().trim().split('_');
+
+  const newWord = [words[0]];
+
+  for (const [key, value] of words.entries()) {
+    if (key !== 0)
+      newWord.push(value.replace(value[0], value[0].toUpperCase()));
+  }
+
+  console.log(newWord.join(''));
+};
+
+convertSnakeCaseToCamelCase('underscore_case');
+
+convertSnakeCaseToCamelCase(' first_name');
+
+convertSnakeCaseToCamelCase('Some_Variable ');
+
+convertSnakeCaseToCamelCase('  calculate_AGE');
+
+convertSnakeCaseToCamelCase('delayed_departure');
